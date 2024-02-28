@@ -1,4 +1,3 @@
-#file = input("Nom du fichier sans l'extension: ")
 
 
 
@@ -18,14 +17,19 @@ if os.path.exists("translated_cache.json"):
 # variables +
 translator = Translator()
 translation_dictionary = {}
-fichier = "script.rpy"
-fichiercible = "script_traduit.rpy"
+
 replacevars = '[...]'
 translated_dialogue = ''
 slash_quote_start = 0
 slash_quote_end = 0
 spaces_at_start = 0
 spaces_at_end = 0
+fichier = input("Nom du fichier sans l'extension: ")
+fichiercible = fichier + "_traduit.rpy"
+fichier += ".rpy"
+langue_source = input("Langue d'origine: ")
+langue_cible = input("Langue cible: ")
+
 
 ### fonctions ###
 # simple quotes
@@ -69,7 +73,7 @@ def escape_simple_quotes():
         return
     
     
-    translated_dialogue = translator.translate(dialogue_filtered, src='fr', dest='en').text
+    translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
     
     
     translated_dialogue = translated_dialogue.replace("'", "\\'")
@@ -126,7 +130,7 @@ def escape_double_quotes():
         return
 
 
-    translated_dialogue = translator.translate(dialogue_filtered, src='fr', dest='en').text
+    translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
 
     for s in range(spaces_at_start):
         translated_dialogue = " " + translated_dialogue
