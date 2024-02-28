@@ -30,6 +30,7 @@ spaces_at_end = 0
 # fonctions
 def escape_simple_quotes():
     global translated_dialogue
+    global dialogue_filtered
     global slash_quote_end
     global slash_quote_start
     global spaces_at_start
@@ -41,7 +42,7 @@ def escape_simple_quotes():
         return
     else:
         dialogue_filtered = dialogue_filtered[spaces_at_start:]
-        #spaces_at_start = 0
+        spaces_at_start = 0
 
     if dialogue_filtered.startswith("\\'"):
         dialogue_filtered = dialogue_filtered[2:]
@@ -49,18 +50,23 @@ def escape_simple_quotes():
         escape_simple_quotes()
         return
     
+    
     if dialogue_filtered.endswith(" "):
         spaces_at_end += 1
         escape_simple_quotes()
         return
-    else:
+    elif spaces_at_end > 0:
         dialogue_filtered = dialogue_filtered[:-spaces_at_end]
+        spaces_at_end = 0
+
+    
     
     if dialogue_filtered.endswith("\\'"):
         dialogue_filtered = dialogue_filtered[:-2]  
         slash_quote_end += 1
         escape_simple_quotes()
         return
+    
     
     translated_dialogue = translator.translate(dialogue_filtered, src='fr', dest='en').text
     
@@ -81,22 +87,55 @@ def escape_simple_quotes():
     translated_dialogue = f"'{translated_dialogue}'"
 
 def escape_double_quotes():
+    global dialogue_filtered
     global translated_dialogue
     global slash_quote_start
     global slash_quote_end
+    global spaces_at_start
+    global spaces_at_end
+
+    if dialogue_filtered.startswith(" "):
+        spaces_at_start += 1
+        escape_double_quotes()
+        return
+    else:
+        dialogue_filtered = dialogue_filtered[spaces_at_start:]
+        spaces_at_start = 0
     
-    if translated_dialogue.startswith('\\"'):
-        translated_dialogue = translated_dialogue[2:]
+    if dialogue_filtered.startswith('\\"'):
+        dialogue_filtered = dialogue_filtered[2:]
         slash_quote_start += 1
         escape_double_quotes()
         return
-    if translated_dialogue.endswith('\\"'):
-        translated_dialogue = translated_dialogue[:-2]
+    
+    if dialogue_filtered.endswith(" "):
+        spaces_at_end += 1
+        escape_double_quotes()
+        return
+    elif spaces_at_end > 0:
+        dialogue_filtered = dialogue_filtered[:-spaces_at_end]
+        spaces_at_end = 0
+
+
+    if dialogue_filtered.endswith('\\"'):
+        dialogue_filtered = dialogue_filtered[:-2]
         slash_quote_end += 1
         escape_double_quotes()
         return
-    
+
+
+    translated_dialogue = translator.translate(dialogue_filtered, src='fr', dest='en').text
+
+
     translated_dialogue = translated_dialogue.replace('"', '\\"')
+
+    for s in range(spaces_at_start):
+        translated_dialogue = " " + translated_dialogue
+
+    for e in range(spaces_at_end):
+        translated_dialogue = translated_dialogue + " "
+
+    
     for i in range(slash_quote_start):
         translated_dialogue = '\\"' + translated_dialogue
 
@@ -139,8 +178,8 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                                 dialogue_filtered = dialogue_filtered[:-1]
                                 simple_quote_dialogue = True
 
-                                if simple_quote_dialogue == True:
-                                    escape_simple_quotes()
+                        if simple_quote_dialogue == True:
+                                escape_simple_quotes()
                         
                         if dialogue_filtered.startswith('"'):
                             dialogue_filtered = dialogue_filtered[1:]
@@ -152,10 +191,6 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
 
                         if double_quote_dialogue == True:
                             escape_double_quotes()
-
-
-                        # à ce moment tout est traduit
-                        print(translated_dialogue)
                         
 
 
