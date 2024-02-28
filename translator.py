@@ -27,7 +27,8 @@ slash_quote_end = 0
 spaces_at_start = 0
 spaces_at_end = 0
 
-# fonctions
+### fonctions ###
+# simple quotes
 def escape_simple_quotes():
     global translated_dialogue
     global dialogue_filtered
@@ -86,6 +87,7 @@ def escape_simple_quotes():
 
     translated_dialogue = f"'{translated_dialogue}'"
 
+# double quotes    
 def escape_double_quotes():
     global dialogue_filtered
     global translated_dialogue
@@ -125,9 +127,6 @@ def escape_double_quotes():
 
 
     translated_dialogue = translator.translate(dialogue_filtered, src='fr', dest='en').text
-
-
-    translated_dialogue = translated_dialogue.replace('"', '\\"')
 
     for s in range(spaces_at_start):
         translated_dialogue = " " + translated_dialogue
@@ -204,10 +203,10 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                         translation_dictionary[dialogue] = translated_dialogue  
                     else:
                         translated_dialogue = translation_dictionary[dialogue]
-                    f_cible.write(f"{line.replace(dialogue, translated_dialogue)}\n")
+                    f_cible.write(f"{line.replace(dialogue, translated_dialogue)}")
                 
                 # si il y a pas de dialogue 
                 else:
-                    f_cible.write(f"{line}\n")
+                    f_cible.write(f"{line}")
             else:
-                f_cible.write(f"{line}\n")
+                f_cible.write(f"{line}")
