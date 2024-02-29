@@ -1,6 +1,3 @@
-
-
-
 # modules
 import os
 import re
@@ -17,8 +14,6 @@ if os.path.exists("translated_cache.json"):
 # variables +
 translator = Translator()
 translation_dictionary = {}
-
-replacevars = '[...]'
 translated_dialogue = ''
 slash_quote_start = 0
 slash_quote_end = 0
@@ -128,7 +123,7 @@ def escape_double_quotes():
         slash_quote_end += 1
         escape_double_quotes()
         return
-
+    
 
     translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
 
@@ -149,7 +144,6 @@ def escape_double_quotes():
 
 
 
-
 ##### main #####
 # ouvrir les fichier source et cible 
 with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
@@ -166,13 +160,19 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
             # si la ligne n'est pas un commentaire ou old (elle peut contenir des dialogues)
             if not line.strip().startswith("#") and not line.strip().startswith("old"):
                 # filtrer les dialogues entre guillemets
-                #dialogue = re.search(r'"((?:[^"\\]|\\.)*?)"|\'((?:[^\'\\]|\\.)*?)\'', line)
                 dialogue = re.search(r'"((?:\\"|[^"])*?)"|\'((?:\\\'|[^\'])*?)\'', line)
                 if dialogue:
                     dialogue = dialogue.group()
                     if dialogue not in translation_dictionary:
-                        dialogue_filtered =re.sub(r'\[(.*?)\]', replacevars, dialogue)
-                        # échappement de guillemets simples
+                        # variables
+                        vars = re.findall(r'\[(.*?)\]', dialogue)
+                        dialogue_filtered = re.sub(r'\[(.*?)\]', '[...]', dialogue)
+                        # filtrer tag
+                        tags = re.findall(r'{(.*?)}', dialogue_filtered)
+                        print(tags)
+                        dialogue_filtered = re.sub(r'\{(.*?)\}',  "{...}", dialogue_filtered)
+
+                        # échappement de guillemets 
                         if dialogue_filtered.startswith("'"):
                                 dialogue_filtered = dialogue_filtered[1:]
                                 simple_quote_dialogue = True
@@ -197,17 +197,27 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                         
 
 
-
-                        # liste des variables []
-                        vars = re.findall(r'\[(.*?)\]', dialogue)
                         # restaurer les variables
                         for var in vars:
                             var = f"[{var}]"
-                            translated_dialogue = translated_dialogue.replace(replacevars, var, 1)
-                        translation_dictionary[dialogue] = translated_dialogue  
+                            translated_dialogue = translated_dialogue.replace("[...]", var, 1)
+                        
+                        
+                        for tag in tags:
+                            tag = f"{{{tag}}}"
+                            print(tag)
+                            translated_dialogue = translated_dialogue.replace("{...}", tag, 1)
+                        
+                        translation_dictionary[dialogue] = translated_dialogue
+
+
+                    
+                    # if dialogue is in translation dictionary
                     else:
                         translated_dialogue = translation_dictionary[dialogue]
                     f_cible.write(f"{line.replace(dialogue, translated_dialogue)}")
+
+
                 
                 # si il y a pas de dialogue 
                 else:
