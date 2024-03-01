@@ -28,7 +28,7 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 
 Cet outil est actuellement en version bêta.Il se peut que des bugs mineurs se produisent mais rien de grave. Il est mis à jour régulièrement et je travaille constamment à son amélioration et à l'ajout de nouvelles fonctionnalités.
 
-Si vous rencontrez des problèmes ou avez des suggestions d'amélioration, n'hésitez pas à l'en en informer en créant une nouvelle [issue](https://github.com/cherifVN/Ren-Py-Novel-Translation/issues).
+Si vous rencontrez des problèmes ou avez des suggestions d'amélioration, n'hésitez pas à m'en en informer en créant une nouvelle [issue](https://github.com/cherifVN/Ren-Py-Novel-Translation/issues).
 
 Si vous souhaitez apporter des modifications ou des corrections, n'hésitez pas à créer un [fork](https://github.com/cherifVN/Ren-Py-Novel-Translation/fork) du projet, à effectuer vos modifications et à soumettre une [pull request](https://github.com/cherifVN/Ren-Py-Novel-Translation/pulls) avec vos propositions.
 
