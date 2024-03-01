@@ -6,8 +6,14 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 ## Table des Matières
 
 - [Utilisation](#utilisation)
+  
 - [Avertissement](#avertissement)
+  
 - [Limitations et Erreurs Connues](#limitations-et-erreurs-connues)
+  - [Traductions](#traductions)
+  - [Echappements](#echappements)
+  - [Encodage de fichiers](#encodage-de-fichiers)
+    
 - [License](#license)
 
 ## Utilisation
@@ -46,7 +52,6 @@ Les traductions sont effectuées par un traducteur automatique, comme google tra
 
 Le code n'étant pas optimisé, il se peut que la traduction soit longue pour les gros fichiers
 
-### Images et Sons
 Le traducteur traduit uniquement les fichiers en .rpy. Il ne traduira en aucun cas d'autres fichiers comme les images, les sons etc.
 
 ### Encodage de fichiers 
@@ -61,11 +66,12 @@ Certains echappements ont des problèmes.
 3. des espaces en trop peuvent se rajouter. "ce \\"texte\\" par exemple" devient "This \\ "text \\" for example" au lieu de "This \\"text\\" for example"
 4. espaces entre balises qui se succèdent: "texte avec {balise}{2e}" devient "text with {balise} {2e}" au lieu de "text with {balise}{2e}"
 
-### Json
+### A venir 
 Le système de fichier json n'a pas été mis pour l'instant. Il sera intégré lorsque le code fonctionnera parfaitement et sera expliqué
 
-### traduire tout le dossier 
 Un système de traduction de tous les fichiers rpy d'un répertoire sera ajouté également
+
+Les erreurs cités précédemment seront bien sûr corrigées
 
 
 
