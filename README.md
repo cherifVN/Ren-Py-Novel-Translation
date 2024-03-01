@@ -7,6 +7,7 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 
 - [Utilisation](#utilisation)
 - [Avertissement](#avertissement)
+- [Limitations et Erreurs Connues](#limitations-et-erreurs-connues)
 - [License](#license)
 
 ## Utilisation
@@ -26,15 +27,46 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 ## Avertissement
 
 
-Cet outil est actuellement en version bêta.Il se peut que des bugs mineurs se produisent mais rien de grave. Il est mis à jour régulièrement et je travaille constamment à son amélioration et à l'ajout de nouvelles fonctionnalités.
+Cet outil est actuellement en version bêta.Il se peut que des bugs mineurs se produisent mais rien de grave. Il est mis à jour régulièrement et je travaille constamment à son amélioration et à l'ajout de nouvelles fonctionnalités
 
-Si vous rencontrez des problèmes ou avez des suggestions d'amélioration, n'hésitez pas à m'en en informer en créant une nouvelle [issue](https://github.com/cherifVN/Ren-Py-Novel-Translation/issues).
+Si vous rencontrez des problèmes ou avez des suggestions d'amélioration, n'hésitez pas à m'en en informer en créant une nouvelle [issue](https://github.com/cherifVN/Ren-Py-Novel-Translation/issues)
 
-Si vous souhaitez apporter des modifications ou des corrections, n'hésitez pas à créer un [fork](https://github.com/cherifVN/Ren-Py-Novel-Translation/fork) du projet, à effectuer vos modifications et à soumettre une [pull request](https://github.com/cherifVN/Ren-Py-Novel-Translation/pulls) avec vos propositions.
+Si vous souhaitez apporter des modifications ou des corrections, n'hésitez pas à créer un [fork](https://github.com/cherifVN/Ren-Py-Novel-Translation/fork) du projet, à effectuer vos modifications et à soumettre une [pull request](https://github.com/cherifVN/Ren-Py-Novel-Translation/pulls) avec vos propositions
 
-De plus, si vous appréciez cet outil et que vous souhaitez soutenir son développement, n'hésitez pas à lui donner une étoile ⭐️ sur GitHub.
+De plus, si vous appréciez cet outil et que vous souhaitez soutenir son développement, n'hésitez pas à lui donner une étoile ⭐️ sur GitHub
 
 Merci de votre intérêt et de votre soutien !
+
+## Limitations et Erreurs Connues
+
+ Comme Ren'Py Novel Translation est en version beta, il a quelques limitations et erreurs connues à prendre en compte :
+
+### Traductions
+Les traductions sont effectuées par un traducteur automatique, comme google traduction, ce qui peut causer des traductions approximatives. Il est conseillé de relire le code pour corriger si besoin.
+
+Le code n'étant pas optimisé, il se peut que la traduction soit longue pour les gros fichiers
+
+### Images et Sons
+Le traducteur traduit uniquement les fichiers en .rpy. Il ne traduira en aucun cas d'autres fichiers comme les images, les sons etc.
+
+### Encodage de fichiers 
+
+certains encodages de fichiers autre que UTF-8 et UTF-8 with BOM peuvent causer des problèmes mais vous n'avez pas à vous en soucier car par défaut avec Ren'Py ils sont en UTF-8
+
+### Echappements
+Certains echappements ont des problèmes. 
+
+1. L'échappement du \n n'est pas pris en charge
+2. les echappemets de guillemets sont pris en charge mais contient des erreurs mineures. exemple: 'je \\'mange\\'' traduit en anglais devient 'I\\'m eating\\'' traduction exacte : 'I\\'m \\'eating\\''
+3. des espaces en trop peuvent se rajouter. "ce \\"texte\\" par exemple" devient "This \\ "text \\" for example" au lieu de "This \\"text\\" for example"
+4. espaces entre balises qui se succèdent: "texte avec {balise}{2e}" devient "text with {balise} {2e}" au lieu de "text with {balise}{2e}"
+
+### Json
+Le système de fichier json n'a pas été mis pour l'instant. Il sera intégré lorsque le code fonctionnera parfaitement et sera expliqué
+
+### traduire tout le dossier 
+Un système de traduction de tous les fichiers rpy d'un répertoire sera ajouté également
+
 
 
 ## License
