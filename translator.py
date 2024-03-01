@@ -206,6 +206,7 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                             tag = f"{{{tag}}}"
                             translated_dialogue = translated_dialogue.replace("{...}", tag, 1)
                         
+                        print(translated_dialogue)
                         translation_dictionary[dialogue] = translated_dialogue
 
 
