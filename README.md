@@ -7,9 +7,7 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 
 - [Utilisation](#utilisation)
 - [Avertissement](#avertissement)
-  - 
-
--[Limitations et Erreurs Connues](#limitations-et-erreurs-connues)
+- [Limitations et Erreurs Connues](#limitations-et-erreurs-connues)
 - [License](#license)
 
 ## Utilisation
