@@ -13,6 +13,7 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
   - [Traductions](#traductions)
   - [Echappements](#echappements)
   - [Encodage de fichiers](#encodage-de-fichiers)
+- [A venir](#a-venir)
     
 - [License](#license)
 
@@ -26,9 +27,6 @@ Il filtre le fichier afin de traduire uniquement les dialogues en prenant soin d
 6. Copiez [translator.py](https://github.com/cherifVN/Ren-Py-Novel-Translation/blob/main/translator.py) dans le dossier tl/yourlanguage (yourlanguage est le nom de la langue de la traduction)
 7. Executez le. Renseignez le nom du fichier à traduire, la langue source/d'origine et la langue cible (dans laquelle vous voulez traduire)
 8. Votre fichier sera traduit dans en tant que nomfichier_traduit.rpy (nomfichier est le nom de départ de votre fichier)
-
-
-
 
 ## Avertissement
 
@@ -64,15 +62,13 @@ Certains echappements ont des problèmes.
 1. L'échappement du \n n'est pas pris en charge
 2. les echappemets de guillemets sont pris en charge mais contient des erreurs mineures. exemple: 'je \\'mange\\'' traduit en anglais devient 'I\\'m eating\\'' traduction exacte : 'I\\'m \\'eating\\''
 3. des espaces en trop peuvent se rajouter. "ce \\"texte\\" par exemple" devient "This \\ "text \\" for example" au lieu de "This \\"text\\" for example"
-4. espaces entre balises qui se succèdent: "texte avec {balise}{2e}" devient "text with {balise} {2e}" au lieu de "text with {balise}{2e}"
 
-### A venir 
+## A venir 
 Le système de fichier json n'a pas été mis pour l'instant. Il sera intégré lorsque le code fonctionnera parfaitement et sera expliqué
 
 Un système de traduction de tous les fichiers rpy d'un répertoire sera ajouté également
 
 Les erreurs cités précédemment seront bien sûr corrigées
-
 
 
 ## License
