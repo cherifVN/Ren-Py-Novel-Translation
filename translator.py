@@ -168,8 +168,10 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                         vars = re.findall(r'\[(.*?)\]', dialogue)
                         dialogue_filtered = re.sub(r'\[(.*?)\]', '[...]', dialogue)
                         # filtrer tag
-                        tags = re.findall(r'{(.*?)}', dialogue_filtered)
-                        dialogue_filtered = re.sub(r'\{(.*?)\}',  "{...}", dialogue_filtered)
+                        tags = re.finditer(r'({(.*?)})+', dialogue_filtered)
+                        tags = [tag.group(0) for tag in tags]
+                        for tag in tags:
+                            dialogue_filtered = re.sub(tag,  "{...}", dialogue_filtered)
 
                         # échappement de guillemets 
                         if dialogue_filtered.startswith("'"):
@@ -203,7 +205,7 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                         
                         
                         for tag in tags:
-                            tag = f"{{{tag}}}"
+                            tag = f"{tag}"
                             translated_dialogue = translated_dialogue.replace("{...}", tag, 1)
                         
                         print(translated_dialogue)
