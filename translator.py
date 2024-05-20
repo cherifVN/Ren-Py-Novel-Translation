@@ -150,16 +150,17 @@ def escape_double_quotes():
 
 ##### main #####
 # ouvrir les fichier source et cible 
-with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
-    with open(fichier, 'r', encoding='utf-8') as f_source:
-        # define line
-        for line in f_source:
-            slash_quote_start = 0
-            slash_quote_end = 0
-            simple_quote_dialogue = False
-            double_quote_dialogue = False
-            spaces_at_end = 0
-            spaces_at_start = 0
+if os.path.exists(fichiercible):
+    with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
+        with open(fichier, 'r', encoding='utf-8') as f_source:
+            # define line
+            for line in f_source:
+                slash_quote_start = 0
+                slash_quote_end = 0
+                simple_quote_dialogue = False
+                double_quote_dialogue = False
+                spaces_at_end = 0
+                spaces_at_start = 0
 
             # si la ligne n'est pas un commentaire ou old (elle peut contenir des dialogues)
             if not line.strip().startswith("#") and not line.strip().startswith("old"):
