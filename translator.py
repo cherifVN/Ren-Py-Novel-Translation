@@ -67,9 +67,11 @@ def escape_simple_quotes():
         escape_simple_quotes()
         return
     
-    
-    translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
-    
+    #dialogue_filtered = dialogue_filtered.replace("\\'", "'")
+    try:
+        translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
+    except Exception as e:
+        print(e)
     
     translated_dialogue = translated_dialogue.replace("'", "\\'")
     for s in range(spaces_at_start):
@@ -124,9 +126,11 @@ def escape_double_quotes():
         escape_double_quotes()
         return
     
-
-    translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
-
+    try:
+        translated_dialogue = translator.translate(dialogue_filtered, src=langue_source, dest=langue_cible).text
+    except Exception as e:
+        print(e)
+        
     for s in range(spaces_at_start):
         translated_dialogue = " " + translated_dialogue
 
