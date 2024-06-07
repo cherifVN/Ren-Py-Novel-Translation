@@ -180,11 +180,11 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
                         # variables
                         vars = re.findall(r'\[(.*?)\]', dialogue)
                         dialogue_filtered = re.sub(r'\[(.*?)\]', '[...]', dialogue)
-                        # filtrer tag
+                        # Filtrer les balises
                         tags = re.finditer(r'({(.*?)})+', dialogue_filtered)
                         tags = [tag.group(0) for tag in tags]
                         for tag in tags:
-                            dialogue_filtered = re.sub(tag,  "{...}", dialogue_filtered)
+                            dialogue_filtered = dialogue_filtered.replace(tag, "{...}", 1)
 
                         # échappement de guillemets 
                         if dialogue_filtered.startswith("'"):
