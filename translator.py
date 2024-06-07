@@ -19,6 +19,7 @@ slash_quote_start = 0
 slash_quote_end = 0
 spaces_at_start = 0
 spaces_at_end = 0
+# spacetag
 fichier = input("Nom du fichier sans l'extension: ")
 fichiercible = fichier + "_traduit.rpy"
 fichier += ".rpy"
@@ -150,7 +151,7 @@ def escape_double_quotes():
 
 ##### main #####
 # ouvrir les fichier source et cible 
-if os.path.exists(fichiercible):
+if os.path.exists(fichier):
     with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
         with open(fichier, 'r', encoding='utf-8') as f_source:
             # define line
@@ -175,6 +176,9 @@ if os.path.exists(fichiercible):
                         # filtrer tag
                         tags = re.finditer(r'({(.*?)})+', dialogue_filtered)
                         tags = [tag.group(0) for tag in tags]
+                        if tags:
+                            len(tags)
+                                
                         for tag in tags:
                             dialogue_filtered = re.sub(tag,  "{...}", dialogue_filtered)
 
