@@ -208,24 +208,22 @@ with open(fichiercible, 'w+', encoding='utf-8') as f_cible:
 
                         if double_quote_dialogue == True:
                             escape_double_quotes()
-                        
 
+                            
+                        
+                        for tag in tags:
+                            tag = f"{tag}"
+                            translated_dialogue = translated_dialogue.replace("{...}", tag, 1)
 
                         # restaurer les variables
                         for var in vars:
                             var = f"[{var}]"
                             translated_dialogue = translated_dialogue.replace("[...]", var, 1)
-                        
-                        
-                        for tag in tags:
-                            tag = f"{tag}"
-                            translated_dialogue = translated_dialogue.replace("{...}", tag, 1)
+                            
                         if error == False:
                             print(translated_dialogue)
                             translation_dictionary[dialogue] = translated_dialogue
 
-
-                    
                    
                     else:  # if dialogue is in translation dictionary
                         translated_dialogue = translation_dictionary[dialogue]
