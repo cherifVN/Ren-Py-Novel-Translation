@@ -25,6 +25,10 @@ fichier += ".rpy"
 langue_source = input("Langue d'origine: ")
 langue_cible = input("Langue cible: ")
 
+if not os.path.exists(fichier):
+    print("Le fichier n'existe pas")
+    exit(1)
+
 
 ### fonctions ###
 # simple quotes
