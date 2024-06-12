@@ -40,36 +40,21 @@ def escape_simple_quotes():
     global spaces_at_start
     global spaces_at_end
 
-    if dialogue_filtered.startswith(" "):
+    while dialogue_filtered.startswith(" "):
         spaces_at_start += 1
-        escape_simple_quotes()
-        return
-    else:
-        dialogue_filtered = dialogue_filtered[spaces_at_start:]
-        spaces_at_start = 0
+        dialogue_filtered = dialogue_filtered[1:]
 
-    if dialogue_filtered.startswith("\\'"):
-        dialogue_filtered = dialogue_filtered[2:]
+    while dialogue_filtered.startswith("\\'"):
         slash_quote_start += 1
-        escape_simple_quotes()
-        return
-    
-    
-    if dialogue_filtered.endswith(" "):
-        spaces_at_end += 1
-        escape_simple_quotes()
-        return
-    elif spaces_at_end > 0:
-        dialogue_filtered = dialogue_filtered[:-spaces_at_end]
-        spaces_at_end = 0
+        dialogue_filtered = dialogue_filtered[2:]
 
-    
-    
-    if dialogue_filtered.endswith("\\'"):
-        dialogue_filtered = dialogue_filtered[:-2]  
+    while dialogue_filtered.endswith(" "):
+        spaces_at_end += 1
+        dialogue_filtered = dialogue_filtered[:-1]
+
+    while dialogue_filtered.endswith("\\'"):
         slash_quote_end += 1
-        escape_simple_quotes()
-        return
+        dialogue_filtered = dialogue_filtered[:-2]
     
     #dialogue_filtered = dialogue_filtered.replace("\\'", "'")
     try:
@@ -103,27 +88,18 @@ def escape_double_quotes():
     global spaces_at_start
     global spaces_at_end
 
-    if dialogue_filtered.startswith(" "):
-        spaces_at_start += 1
-        escape_double_quotes()
-        return
-    else:
-        dialogue_filtered = dialogue_filtered[spaces_at_start:]
-        spaces_at_start = 0
     
-    if dialogue_filtered.startswith('\\"'):
+    while dialogue_filtered.startswith(" "):
+        spaces_at_start += 1
+        dialogue_filtered = dialogue_filtered[1:]
+
+    while dialogue_filtered.startswith('\\"'):
         dialogue_filtered = dialogue_filtered[2:]
         slash_quote_start += 1
-        escape_double_quotes()
-        return
     
-    if dialogue_filtered.endswith(" "):
+    while dialogue_filtered.endswith(" "):
         spaces_at_end += 1
-        escape_double_quotes()
-        return
-    elif spaces_at_end > 0:
-        dialogue_filtered = dialogue_filtered[:-spaces_at_end]
-        spaces_at_end = 0
+        dialogue_filtered = dialogue_filtered[:-1]
 
 
     if dialogue_filtered.endswith('\\"'):
